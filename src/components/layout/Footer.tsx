@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="border-t border-gray-100 dark:border-gray-800 py-10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-gray-400 dark:text-gray-500">
-          © {new Date().getFullYear()} {meta.name}. Built with React + TypeScript.
+          By {meta.fullName}
         </p>
         <div className="flex items-center gap-4">
           <a href={social.github} target="_blank" rel="noopener" className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
