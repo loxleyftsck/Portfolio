@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 font-sans antialiased transition-colors duration-300;
+  }
+
+  .dark body {
+    @apply bg-gray-950 text-gray-100;
+  }
+
+  * {
+    @apply border-gray-200 dark:border-gray-800;
+  }
+
+  ::selection {
+    @apply bg-gray-900 text-white dark:bg-white dark:text-gray-900;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+  }
+}
+
+@layer components {
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-gray-900 dark:text-white leading-tight;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-lg dark:hover:shadow-gray-900/50;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold rounded-xl text-sm transition-all duration-200 hover:bg-gray-700 dark:hover:bg-gray-100 hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-transparent border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-xl text-sm transition-all duration-200 hover:border-gray-500 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800/50;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-mono;
+  }
+
+  .nav-link {
+    @apply text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-150;
+  }
+}
+
+/* ── Blueprint grid background ─────────────────────────────────────────────── */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  --fine-y: 0px;
+  --coarse-y: 0px;
+}
+
+.grid-bg > div {
+  position: absolute;
+  /* Overscan vertically so parallax drift never exposes a hard edge. */
+  inset: -25% 0;
+  will-change: transform;
+  /* Fade out toward the edges so the lattice never fights the content. */
+  -webkit-mask-image: radial-gradient(ellipse 95% 80% at 50% 45%, #000 25%, transparent 88%);
+  mask-image: radial-gradient(ellipse 95% 80% at 50% 45%, #000 25%, transparent 88%);
+}
+
+.grid-bg__fine {
+  transform: translate3d(0, var(--fine-y), 0);
+  background-image:
+    linear-gradient(to right, rgb(17 24 39 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(17 24 39 / 0.08) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+.grid-bg__coarse {
+  transform: translate3d(0, var(--coarse-y), 0);
+  background-image:
+    linear-gradient(to right, rgb(17 24 39 / 0.13) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(17 24 39 / 0.13) 1px, transparent 1px);
+  background-size: 170px 170px;
+}
+
+.dark .grid-bg__fine {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.065) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.065) 1px, transparent 1px);
+}
+
+.dark .grid-bg__coarse {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.11) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.11) 1px, transparent 1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-bg > div {
+    transform: none;
+  }
+}
+
+/* ── Custom Cursor ─────────────────────────────────────────────────────────── */
+@media (pointer: fine) {
+  body { cursor: none; }
+  a, button, [role="button"], label, [data-cursor-hover] { cursor: none; }
+  /* restore text cursor for form elements — JS overlays the caret ring instead */
+  input, textarea, select, [contenteditable] { cursor: text; }
+}
+
+.cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate(-200px, -200px);
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid white;
+  background-color: transparent;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transform: translate(-200px, -200px);
+  /* transition covers all morphable props including border-radius for text mode */
+  transition:
+    opacity        0.3s  ease,
+    width          0.2s  cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    height         0.2s  cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-radius  0.2s  cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color   0.15s ease,
+    border-width   0.15s ease,
+    background-color 0.2s ease;
+  will-change: transform, width, height;
+}
+
+/* ── Click ripple ──────────────────────────────────────────────────────────── */
+@keyframes cursor-ripple-out {
+  0%   { transform: translate(-50%, -50%) scale(0);   opacity: 0.45; }
+  100% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; }
+}
+
+.cursor-ripple {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 9997;
+  animation: cursor-ripple-out 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot, .cursor-ring, .cursor-ripple { display: none; }
+  body, a, button, [role="button"] { cursor: auto; }
+  input, textarea, select, [contenteditable] { cursor: text; }
+}
