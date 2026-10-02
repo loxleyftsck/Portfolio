@@ -1,11 +1,11 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import type { ComponentType } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Mail, ArrowRight } from '../components/ui/Icons';
 import { GithubIcon, LinkedinIcon } from '../components/ui/Icons';
 import { social } from '../data/portfolio';
 
 interface ContactLink {
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: ComponentType<{ size?: number; className?: string }>;
   label: string;
   href: string;
   desc: string;
@@ -18,15 +18,17 @@ const links: ContactLink[] = [
 ];
 
 export default function Contact() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section id="contact" className="py-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: reduceMotion ? 0 : 0.5 }}
           className="max-w-2xl"
         >
           <p className="section-label">Contact</p>
@@ -42,11 +44,11 @@ export default function Contact() {
                 key={label}
                 href={href}
                 target={label !== 'Email' ? '_blank' : undefined}
-                rel="noopener"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                rel={label !== 'Email' ? 'noopener noreferrer' : undefined}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : i * 0.08 }}
                 className="card card-hover flex flex-col gap-3 group"
               >
                 <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-gray-900 transition-all duration-200">

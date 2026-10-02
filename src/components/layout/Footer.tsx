@@ -10,13 +10,13 @@ export default function Footer() {
           By {meta.fullName}
         </p>
         <div className="flex items-center gap-4">
-          <a href={social.github} target="_blank" rel="noopener" className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+          <a href={social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
             <GithubIcon size={18} />
           </a>
-          <a href={social.linkedin} target="_blank" rel="noopener" className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+          <a href={social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
             <LinkedinIcon size={18} />
           </a>
-          <a href={`mailto:${social.email}`} className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+          <a href={`mailto:${social.email}`} aria-label="Email Herald" className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
             <Mail size={18} />
           </a>
         </div>

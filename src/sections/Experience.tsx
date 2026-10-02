@@ -1,18 +1,20 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { experiences } from '../data/portfolio';
 import TimelineItem from '../components/ui/TimelineItem';
 
 export default function Experience() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section id="experience" className="py-24 bg-gray-50/70 dark:bg-gray-900/40">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: reduceMotion ? 0 : 0.5 }}
           className="mb-14"
         >
           <p className="section-label">Journey</p>

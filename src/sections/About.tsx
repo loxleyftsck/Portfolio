@@ -1,18 +1,20 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { skillGroups } from '../data/portfolio';
 import Badge from '../components/ui/Badge';
 
 export default function About() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section id="about" className="py-24 bg-gray-50/70 dark:bg-gray-900/40">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: reduceMotion ? 0 : 0.5 }}
           className="mb-14"
         >
           <p className="section-label">About</p>
@@ -31,11 +33,11 @@ export default function About() {
           {skillGroups.map((group, i) => (
             <motion.div
               key={group.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -4, scale: 1.008 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              whileHover={reduceMotion ? undefined : { y: -3 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.4, delay: i * 0.07, type: 'spring', stiffness: 260, damping: 28 }}
+              transition={{ duration: reduceMotion ? 0 : 0.4, delay: reduceMotion ? 0 : i * 0.07, type: 'spring', stiffness: 260, damping: 28 }}
               className="card card-hover"
             >
               <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import type { Experience } from '../../data/portfolio';
 
 interface TimelineItemProps {
@@ -8,12 +8,14 @@ interface TimelineItemProps {
 }
 
 export default function TimelineItem({ item, index, isLast }: TimelineItemProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={reduceMotion ? false : { opacity: 0, x: -20 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.45, delay: index * 0.12 }}
+      transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : index * 0.12 }}
       className="flex gap-5"
     >
       {/* Stem */}

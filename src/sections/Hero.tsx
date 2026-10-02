@@ -1,10 +1,11 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Mail, MapPin } from '../components/ui/Icons';
-import AiFlowScene from '../components/ui/AiFlowScene';
-import { meta, social } from '../data/portfolio';
+import FeaturedWorkPanel from '../components/ui/FeaturedWorkPanel';
+import { meta, projects, social } from '../data/portfolio';
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
+  const featuredProject = projects.find(project => project.id === 'adaptive-cdss');
 
   return (
     <section
@@ -69,14 +70,14 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* A small system map gives the work a concrete, technical frame. */}
+          {/* Put a real project outcome in the first screen, not a generic tech illustration. */}
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 0.08, ease: 'easeOut' }}
             className="flex justify-center lg:justify-end"
           >
-            <AiFlowScene />
+            {featuredProject && <FeaturedWorkPanel project={featuredProject} />}
           </motion.div>
 
         </div>

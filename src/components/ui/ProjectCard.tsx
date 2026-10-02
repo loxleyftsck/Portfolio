@@ -57,7 +57,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <a
           href={project.github}
           target="_blank"
-          rel="noopener"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
         >
           <GithubIcon size={14} />
@@ -67,7 +67,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <a
             href={project.demo}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-900 dark:text-white hover:underline underline-offset-4 transition-colors"
           >
             <ExternalLink size={14} />
