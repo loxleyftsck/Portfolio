@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Menu, X, Sun, Moon } from '../ui/Icons';
-import { GithubIcon } from '../ui/Icons';
 import { useTheme } from '../../hooks/useTheme';
 
 const navLinks = [
-  { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
+  { label: 'About', href: '#about' },
   { label: 'Experience', href: '#experience' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -15,11 +14,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800/60">
+    <header className="site-nav fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800/60">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
         {/* Logo */}
         <a href="#hero" className="font-bold text-gray-900 dark:text-white tracking-tight text-lg">
-          HG<span className="text-gray-400 dark:text-gray-500">.ai</span>
+          HG<span className="site-mark__period">.</span>
         </a>
 
         {/* Desktop nav */}
@@ -55,7 +54,7 @@ export default function Navbar() {
 
       {/* Mobile dropdown */}
       {open && (
-        <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-4 flex flex-col gap-4">
+        <div className="site-nav__menu md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-4 flex flex-col gap-4">
           {navLinks.map(l => (
             <a key={l.href} href={l.href} className="nav-link text-base" onClick={() => setOpen(false)}>
               {l.label}
@@ -69,6 +68,3 @@ export default function Navbar() {
     </header>
   );
 }
-
-// Suppress unused warning — GithubIcon kept for potential extension
-void GithubIcon;

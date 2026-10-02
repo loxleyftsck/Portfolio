@@ -53,7 +53,6 @@ export const projects: Project[] = [
     category: ['web'],
     github: 'https://github.com/loxleyftsck/LuminaWall',
     demo: 'https://lumina-wall-jet.vercel.app',
-    featured: true,
   },
   {
     id: 'microllm',
@@ -64,6 +63,7 @@ export const projects: Project[] = [
     result: 'Serves on 2GB RAM under OWASP ASVS L2 controls',
     category: ['rag', 'infra'],
     github: 'https://github.com/loxleyftsck/MicroLLM-PrivateStack',
+    featured: true,
     image: {
       src: '/projects/microllm-arch.jpg',
       alt: 'Architecture diagram: API layer with JWT auth and OWASP ASVS L2 validation, splitting into a Redis semantic cache and the inference engine, then post-processing and audit logging',
@@ -77,6 +77,7 @@ export const projects: Project[] = [
     tech: ['Python', 'LangChain', 'FAISS', 'FastAPI', 'Docker'],
     category: ['rag'],
     github: 'https://github.com/loxleyftsck/IndoGovRAG',
+    featured: true,
   },
   {
     id: 'careeros',
@@ -96,6 +97,7 @@ export const projects: Project[] = [
     result: 'Automated weekly retraining pipeline, fully reproducible runs',
     category: ['ml', 'infra'],
     github: 'https://github.com/loxleyftsck/StockFlowML',
+    featured: true,
     image: {
       src: '/projects/stockflowml.jpg',
       alt: 'Pipeline diagram: data ingestion from Yahoo Finance through feature engineering, model training, evaluation and reporting, with DVC versioning and weekly retraining on GitHub Actions',

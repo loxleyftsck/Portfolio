@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { projects, filters } from '../data/portfolio';
 import type { Category } from '../data/portfolio';
 import ProjectCard from '../components/ui/ProjectCard';
@@ -8,30 +7,28 @@ type Filter = 'all' | Category;
 
 export default function Projects() {
   const [active, setActive] = useState<Filter>('all');
+  const [showArchive, setShowArchive] = useState(false);
 
   const filtered = active === 'all'
     ? projects
     : projects.filter(p => p.category.includes(active));
+  const featured = filtered.filter(project => project.featured);
+  const archive = filtered.filter(project => !project.featured);
+  const archiveIsVisible = showArchive || active !== 'all';
+  const featuredCount = projects.filter(project => project.featured).length;
 
   return (
     <section id="projects" className="py-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
+        <div className="mb-10">
           <p className="section-label">Projects</p>
           <h2 className="section-title">Selected work</h2>
           <p className="text-gray-500 dark:text-gray-400 mt-3 max-w-xl">
-            {projects.length} of 28 public repositories — the ones that got finished. Source is open
-            for every one; a result is quoted only where there is a number worth quoting.
+            {featuredCount} featured projects from a wider archive. Use the filters to explore work across retrieval, agents, ML, and infrastructure.
           </p>
-        </motion.div>
+        </div>
 
         {/* Filter bar */}
         <div className="flex flex-wrap gap-2 mb-8" role="group" aria-label="Filter projects">
@@ -53,10 +50,43 @@ export default function Projects() {
 
         {/* Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
+          {featured.map(project => (
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
+
+        {archiveIsVisible && archive.length > 0 && (
+          <div className="mt-14">
+            {active === 'all' && (
+              <div className="mb-6 flex items-end justify-between gap-4">
+                <div>
+                  <p className="section-label">More work</p>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">From the archive</h3>
+                </div>
+                <span className="text-xs font-mono text-gray-400 dark:text-gray-500">{archive.length} projects</span>
+              </div>
+            )}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {archive.map(project => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {active === 'all' && archive.length > 0 && (
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              className="btn-secondary"
+              onClick={() => setShowArchive(value => !value)}
+              aria-expanded={showArchive}
+            >
+              {showArchive ? 'Show featured only' : `View all ${projects.length} projects`}
+              <span aria-hidden="true" className={`archive-chevron ${showArchive ? 'is-open' : ''}`}>⌄</span>
+            </button>
+          </div>
+        )}
 
       </div>
     </section>

@@ -1,21 +1,14 @@
-import { motion } from 'framer-motion';
 import { GithubIcon, ExternalLink } from '../ui/Icons';
 import type { Project } from '../../data/portfolio';
 import Badge from './Badge';
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
 }
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
+export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -6, scale: 1.015 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.4, delay: index * 0.08, type: 'spring', stiffness: 260, damping: 28 }}
+    <article
       className="card card-hover group flex flex-col gap-4"
     >
       {/* Fixed aspect + object-contain: diagrams letterbox instead of cropping,
@@ -82,6 +75,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           </a>
         )}
       </div>
-    </motion.article>
+    </article>
   );
 }

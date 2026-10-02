@@ -5,26 +5,19 @@ import About from './sections/About';
 import Projects from './sections/Projects';
 import Experience from './sections/Experience';
 import Contact from './sections/Contact';
-import CustomCursor from './components/ui/CustomCursor';
-import GridBackground from './components/ui/GridBackground';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-      <CustomCursor />
-      <GridBackground />
-      {/* Lifted above the grid layer, which sits at z-0. */}
-      <div className="relative z-10">
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Projects />
-          <Experience />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+    <div className="site-shell min-h-screen text-gray-900 dark:text-white">
+      <Navbar />
+      <main>
+        <Hero />
+        <Projects />
+        <About />
+        <Experience />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }
