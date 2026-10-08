@@ -120,6 +120,7 @@ export const projects: Project[] = [
     result: 'Cleaned ~7.5 GB of raw MTA data; beats naive baseline',
     category: ['ml'],
     github: 'https://github.com/loxleyftsck/transit-demand-forecasting',
+    demo: 'https://transit-demand-forecasting-portfoli.vercel.app',
     image: {
       src: '/projects/transit-pred.jpg',
       alt: 'Test-set plot for Times Sq-42 St: actual hourly entries against tuned LightGBM predictions and a last-week naive baseline, March to May 2024',
