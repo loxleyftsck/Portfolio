@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { Menu, X, Sun, Moon } from '../ui/Icons';
-import { GithubIcon } from '../ui/Icons';
+import { useEffect, useState } from 'react';
+import { Menu, X, Sun, Moon, ArrowUpRight } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 
 const navLinks = [
@@ -13,62 +12,35 @@ const navLinks = [
 export default function Navbar() {
   const { theme, toggle } = useTheme();
   const [open, setOpen] = useState(false);
-
+  useEffect(() => {
+    if (!open) return;
+    const close = (event: KeyboardEvent) => { if (event.key === 'Escape') setOpen(false); };
+    window.addEventListener('keydown', close);
+    return () => window.removeEventListener('keydown', close);
+  }, [open]);
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800/60">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        {/* Logo */}
-        <a href="#hero" className="font-bold text-gray-900 dark:text-white tracking-tight text-lg">
-          HG<span className="text-gray-400 dark:text-gray-500">.ai</span>
-        </a>
-
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map(l => (
-            <a key={l.href} href={l.href} className="nav-link">
-              {l.label}
-            </a>
-          ))}
+    <header className="site-header">
+      <div className="shell site-nav">
+        <a href="#hero" className="wordmark" aria-label="HG.ai home" onClick={() => setOpen(false)}>HG<span>.ai</span></a>
+        <nav className="desktop-nav" aria-label="Main navigation">
+          {navLinks.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}
         </nav>
-
-        {/* Actions */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={toggle}
-            aria-label="Toggle theme"
-            className="w-9 h-9 flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          >
+        <div className="nav-actions">
+          <button type="button" onClick={toggle} className="icon-button" aria-label="Toggle theme">
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-          <a href="#contact" className="hidden md:flex btn-primary text-sm py-2 px-4">
-            Hire Me
-          </a>
-          <button
-            className="md:hidden w-9 h-9 flex items-center justify-center text-gray-600 dark:text-gray-300"
-            onClick={() => setOpen(o => !o)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
+          <a href="#contact" className="nav-contact">Hire Me <ArrowUpRight size={15} /></a>
+          <button type="button" className="icon-button menu-toggle" onClick={() => setOpen(value => !value)}
+            aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? 'Close menu' : 'Open menu'}>
+            {open ? <X size={21} /> : <Menu size={21} />}
           </button>
         </div>
       </div>
-
-      {/* Mobile dropdown */}
-      {open && (
-        <div className="md:hidden border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 px-4 py-4 flex flex-col gap-4">
-          {navLinks.map(l => (
-            <a key={l.href} href={l.href} className="nav-link text-base" onClick={() => setOpen(false)}>
-              {l.label}
-            </a>
-          ))}
-          <a href="#contact" className="btn-primary justify-center" onClick={() => setOpen(false)}>
-            Hire Me
-          </a>
-        </div>
-      )}
+      {open && <nav className="mobile-nav" id="mobile-navigation" aria-label="Mobile navigation">
+        {navLinks.map(link => <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+          {link.label}<ArrowUpRight size={18} />
+        </a>)}
+      </nav>}
     </header>
   );
 }
-
-// Suppress unused warning — GithubIcon kept for potential extension
-void GithubIcon;

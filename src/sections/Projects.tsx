@@ -1,63 +1,39 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { projects, filters } from '../data/portfolio';
 import type { Category } from '../data/portfolio';
 import ProjectCard from '../components/ui/ProjectCard';
+import Reveal from '../components/ui/Reveal';
 
 type Filter = 'all' | Category;
+// Put the new interactive demo first; retain every existing project.
+const orderedProjects = [
+  ...projects.filter(project => project.id === 'transit-demand'),
+  ...projects.filter(project => project.id !== 'transit-demand'),
+];
 
 export default function Projects() {
   const [active, setActive] = useState<Filter>('all');
-
-  const filtered = active === 'all'
-    ? projects
-    : projects.filter(p => p.category.includes(active));
-
+  const filtered = active === 'all' ? orderedProjects : orderedProjects.filter(project => project.category.includes(active));
   return (
-    <section id="projects" className="py-24">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
-
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
-          <p className="section-label">Projects</p>
-          <h2 className="section-title">Selected work</h2>
-          <p className="text-gray-500 dark:text-gray-400 mt-3 max-w-xl">
-            {projects.length} of 28 public repositories — the ones that got finished. Source is open
-            for every one; a result is quoted only where there is a number worth quoting.
-          </p>
+    <section id="projects" className="section projects-section">
+      <div className="shell">
+        <Reveal className="section-heading">
+          <h2>Experiments.<br /><span className="muted-heading">Built into systems.</span></h2>
+          <p>{projects.length} selected projects across retrieval, agents, machine learning, and the infrastructure behind them.</p>
+        </Reveal>
+        <div className="project-filter" role="group" aria-label="Filter projects">
+          {filters.map(filter => <button type="button" key={filter.value}
+            onClick={() => setActive(filter.value)} aria-pressed={active === filter.value}>
+            {filter.label}
+          </button>)}
+        </div>
+        <p className="sr-only" aria-live="polite">{filtered.length} projects shown</p>
+        <motion.div layout className="project-grid" data-all={active === 'all'}>
+          <AnimatePresence initial={false}>
+            {filtered.map((project, index) => <ProjectCard key={project.id} project={project} index={index} />)}
+          </AnimatePresence>
         </motion.div>
-
-        {/* Filter bar */}
-        <div className="flex flex-wrap gap-2 mb-8" role="group" aria-label="Filter projects">
-          {filters.map(f => (
-            <button
-              key={f.value}
-              onClick={() => setActive(f.value)}
-              aria-pressed={active === f.value}
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-150 border ${
-                active === f.value
-                  ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 border-transparent shadow-sm'
-                  : 'bg-transparent text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600'
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
-          ))}
-        </div>
-
       </div>
     </section>
   );
