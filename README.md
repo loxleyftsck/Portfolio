@@ -30,3 +30,7 @@ Keep source images outside public/. Provide chrome.png, dialogue.png, attractor.
     node scripts/optimize-assets.mjs "<source-directory>"
 
 The original profile photo is recoverable from Git history.
+
+## Project explorer
+
+Search matches project titles, descriptions, tools, and category names. It combines with the category buttons and announces the visible count. Each Details button opens a native modal dialog using the existing project data and real evidence images. Escape or the close button dismisses it and focus returns to the originating button. The source data remains in src/data/portfolio.ts.

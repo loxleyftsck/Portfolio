@@ -10,7 +10,7 @@ const art: Record<string, string> = {
   luminawall: '/art/attractor.webp',
 };
 
-export default function ProjectCard({ project, index }: { project: Project; index: number }) {
+export default function ProjectCard({ project, index, onDetails }: { project: Project; index: number; onDetails: (project: Project, trigger: HTMLButtonElement) => void }) {
   const reduce = useReducedMotion();
   const targetX = useMotionValue(0);
   const targetY = useMotionValue(0);
@@ -48,6 +48,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
         {project.result && <p className="project-result">{project.result}</p>}
         <div className="project-tech">{project.tech.map(tech => <span key={tech}>{tech}</span>)}</div>
         <div className="project-links">
+          <button type="button" onClick={event => onDetails(project, event.currentTarget)} aria-label={"View " + project.title + " details"} aria-haspopup="dialog">Details <ArrowUpRight size={15} /></button>
           {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" className="project-demo">
             Live demo <ArrowUpRight size={17} />
           </a>}
