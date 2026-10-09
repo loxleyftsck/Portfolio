@@ -1,8 +1,8 @@
-@import '@fontsource/space-grotesk/400.css';
-@import '@fontsource/space-grotesk/500.css';
-@import '@fontsource/space-grotesk/600.css';
-@import '@fontsource/space-grotesk/700.css';
-@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/space-grotesk/latin-400.css';
+@import '@fontsource/space-grotesk/latin-500.css';
+@import '@fontsource/space-grotesk/latin-600.css';
+@import '@fontsource/space-grotesk/latin-700.css';
+@import '@fontsource/ibm-plex-mono/latin-400.css';
 
 @tailwind base;
 @tailwind components;
@@ -121,7 +121,7 @@ img { display: block; max-width: 100%; }
 .project-description { color: var(--muted); font-size: 14px; line-height: 1.75; margin: 0 0 18px; }
 .project-result { font-size: 12px; line-height: 1.65; padding-left: 12px; border-left: 2px solid var(--accent); margin: 0 0 20px; color: var(--fg); }
 .project-tech { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-bottom: 24px; color: var(--subtle); font: 10px/1.6 'IBM Plex Mono', monospace; }
-.project-links { display: flex; gap: 22px; align-items: center; }
+.project-links { display: flex; flex-wrap: wrap; gap: 12px 22px; align-items: center; }
 .project-links a { min-height: 40px; display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font-size: 12px; transition: color .2s; }
 .project-links a:hover { color: var(--accent); }
 .project-links .project-demo { color: var(--fg); }
@@ -251,3 +251,58 @@ img { display: block; max-width: 100%; }
   .project-visual { will-change: auto; }
   .project-card:hover .project-visual img { transform: none; }
 }
+
+.project-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.project-toolbar .project-filter { margin-bottom: 0; }
+.project-search { display: flex; align-items: center; gap: 10px; width: 285px; min-height: 46px; border-bottom: 1px solid var(--line); color: var(--subtle); }
+.project-search:focus-within { border-color: var(--accent); }
+.project-search input { width: 100%; min-width: 0; padding: 12px 0; background: transparent; color: var(--fg); border: 0; font: inherit; font-size: 12px; }
+.project-search input::placeholder { color: var(--subtle); }
+.project-search input::-webkit-search-cancel-button { display: none; }
+.project-search button { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; border: 0; background: transparent; color: var(--muted); }
+.project-count { color: var(--subtle); font: 10px 'IBM Plex Mono', monospace; margin: 22px 0 32px; }
+.project-links button { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0; border: 0; background: transparent; color: var(--fg); font-size: 12px; transition: color .2s; }
+.project-links button:hover { color: var(--accent); }
+.project-empty { border-block: 1px solid var(--line); padding: 48px 0; }
+.project-empty p { font-size: 24px; letter-spacing: -.04em; margin: 0 0 10px; }
+.project-empty > span { display: block; color: var(--muted); font-size: 14px; margin-bottom: 25px; }
+.project-dialog { width: min(760px, calc(100% - 40px)); max-height: calc(100dvh - 48px); padding: 32px 40px 40px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); color: var(--fg); overscroll-behavior: contain; }
+.project-dialog::backdrop { background: rgb(0 0 0 / .72); backdrop-filter: blur(8px); }
+.project-dialog[open] { animation: detail-enter .3s cubic-bezier(.22, 1, .36, 1); }
+.detail-topline { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.detail-eyebrow { margin: 0; color: var(--accent); font: 10px 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: .07em; }
+.project-dialog h2 { font-size: clamp(32px, 5vw, 52px); line-height: 1.08; letter-spacing: -.06em; font-weight: 500; margin: 0 0 20px; }
+.detail-description { color: var(--muted); line-height: 1.8; font-size: 15px; margin: 0 0 28px; }
+.detail-evidence { margin: 0 0 28px; }
+.detail-evidence img { width: 100%; max-height: 360px; object-fit: contain; padding: 16px; border-radius: 6px; background: #e9e9eb; }
+.detail-evidence figcaption { margin-top: 12px; font-size: 11px; color: var(--subtle); line-height: 1.6; }
+.project-dialog h3 { font: 11px 'IBM Plex Mono', monospace; color: var(--subtle); margin: 0 0 12px; }
+.detail-result { border-left: 2px solid var(--accent); padding-left: 18px; margin-bottom: 28px; }
+.detail-result p { margin: 0; font-size: 16px; line-height: 1.6; }
+.detail-stack { padding-top: 24px; border-top: 1px solid var(--line); }
+.detail-stack ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.detail-stack li { border: 1px solid var(--line); border-radius: 4px; padding: 8px 12px; font: 11px 'IBM Plex Mono', monospace; color: var(--muted); }
+.detail-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.desktop-nav a[aria-current="location"] { color: var(--fg); }
+.desktop-nav a[aria-current="location"]::after { right: 0; }
+.mobile-nav a[aria-current="location"] { color: var(--accent); }
+@keyframes detail-enter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) {
+  .project-search { width: 100%; }
+  .project-count { margin-block: 18px 26px; }
+  .project-dialog { padding: 20px 22px 28px; max-height: calc(100dvh - 24px); width: calc(100% - 24px); }
+  .detail-description { font-size: 14px; }
+  .detail-actions .button { width: 100%; }
+}
+
+.project-links button, .project-links .project-demo { position: relative; }
+.project-links button::after, .project-links .project-demo::after { content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+.project-links button:hover::after, .project-links button:focus-visible::after,
+.project-links .project-demo:hover::after, .project-links .project-demo:focus-visible::after { transform: scaleX(1); }
+.project-links button svg, .project-links .project-demo svg { transition: transform .25s; }
+.project-links button:hover svg, .project-links button:focus-visible svg,
+.project-links .project-demo:hover svg, .project-links .project-demo:focus-visible svg { transform: translate(3px, -3px); }
+.project-dialog[data-closing="true"] { animation: detail-exit .18s ease-in both; }
+.project-dialog[data-closing="true"]::backdrop { animation: backdrop-exit .18s ease-in both; }
+@keyframes detail-exit { to { opacity: 0; transform: translateY(12px) scale(.985); } }
+@keyframes backdrop-exit { to { background: rgb(0 0 0 / 0); backdrop-filter: blur(0); } }
