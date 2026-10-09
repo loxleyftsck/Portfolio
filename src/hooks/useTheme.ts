@@ -1,24 +1,16 @@
 import { useEffect, useState } from 'react';
 
 type Theme = 'dark' | 'light';
-
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('theme') as Theme | null;
-    return stored ?? 'dark';
+    try {
+      const stored = localStorage.getItem('theme');
+      return stored === 'light' ? 'light' : 'dark';
+    } catch { return 'dark'; }
   });
-
   useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    try { localStorage.setItem('theme', theme); } catch { /* Theme still works without storage. */ }
   }, [theme]);
-
-  const toggle = () => setTheme(t => (t === 'dark' ? 'light' : 'dark'));
-
-  return { theme, toggle };
+  return { theme, toggle: () => setTheme(value => value === 'dark' ? 'light' : 'dark') };
 }

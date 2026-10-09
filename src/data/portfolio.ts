@@ -12,7 +12,7 @@ export interface Project {
   demo?: string;
   /**
    * Only set when a real screenshot or diagram exists in the project's repo.
-   * Never a stock photo, an illustration, or an AI-generated mockup — a card
+   * Never a stock photo, an illustration, or an AI-generated mockup, a card
    * with no image is better than a card with a decorative one.
    */
   image?: { src: string; alt: string };
@@ -37,7 +37,7 @@ export const projects: Project[] = [
     id: 'equilibriumx',
     title: 'EquilibriumX',
     description:
-      'Two agents haggle over a price. The RL half optimises for payoff, the LLM half writes the actual messages — so you can watch a bargaining strategy converge and read what it said while getting there.',
+      'Two agents haggle over a price. The RL half optimises for payoff, the LLM half writes the actual messages, so you can watch a bargaining strategy converge and read what it said while getting there.',
     tech: ['Python', 'Reinforcement Learning', 'LLM', 'MLflow', 'Docker'],
     result: 'Converges toward Nash equilibrium price in bilateral bargaining',
     category: ['agents', 'ml'],
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     id: 'luminawall',
     title: 'LuminaWall',
     description:
-      'Wallpaper generator that runs entirely in your tab — chaos-theory attractors and particle physics drawn straight to Canvas, with the heavy loops compiled to WASM. No API key, no server, no upload.',
+      'Wallpaper generator that runs entirely in your tab, chaos-theory attractors and particle physics drawn straight to Canvas, with the heavy loops compiled to WASM. No API key, no server, no upload.',
     tech: ['Next.js 15', 'TypeScript', 'Canvas API', 'WASM', 'Tailwind v4'],
     category: ['web'],
     github: 'https://github.com/loxleyftsck/LuminaWall',
@@ -105,7 +105,7 @@ export const projects: Project[] = [
     id: 'nexscan',
     title: 'NexScan',
     description:
-      'Port scanner in Go — goroutine pool with backpressure, protocol probes for SSH/HTTP/FTP/MySQL/Redis/RDP, TTL-based OS guessing, and a gRPC bridge so you can bolt on Python analysis plugins.',
+      'Port scanner in Go, goroutine pool with backpressure, protocol probes for SSH/HTTP/FTP/MySQL/Redis/RDP, TTL-based OS guessing, and a gRPC bridge so you can bolt on Python analysis plugins.',
     tech: ['Go', 'gRPC', 'Python', 'Concurrency'],
     result: 'Embedded CVE database covering 9 services, 4 evasion levels',
     category: ['infra'],
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     id: 'transit-demand',
     title: 'Transit Demand Forecasting',
     description:
-      'Hourly ridership per station on real MTA data. Most of the work was the unglamorous part — profiling and cleaning ~7.5 GB before LightGBM saw any of it — then Optuna tuning tracked in MLflow.',
+      'Hourly ridership per station on real MTA data. Most of the work was the unglamorous part, profiling and cleaning ~7.5 GB before LightGBM saw any of it, then Optuna tuning tracked in MLflow.',
     tech: ['Python', 'LightGBM', 'Optuna', 'MLflow', 'Pandas'],
     result: 'Cleaned ~7.5 GB of raw MTA data; beats naive baseline',
     category: ['ml'],
@@ -130,7 +130,7 @@ export const projects: Project[] = [
     id: 'rl-minigrid',
     title: 'Partial-Observability RL',
     description:
-      'Four RL paradigms — PPO, recurrent LSTM policies, curriculum learning and GAIL — trained on partially observed MiniGrid, with the debugging process written down rather than tidied away.',
+      'Four RL paradigms, PPO, recurrent LSTM policies, curriculum learning and GAIL, trained on partially observed MiniGrid, with the debugging process written down rather than tidied away.',
     tech: ['Python', 'PyTorch', 'PPO', 'GAIL', 'MiniGrid'],
     category: ['ml'],
     github: 'https://github.com/loxleyftsck/partial-observability-rl-minigrid',
@@ -148,7 +148,7 @@ export const projects: Project[] = [
     id: 'bnb-staking',
     title: 'BNB Staking DApp',
     description:
-      'BEP-20 token with staking on BNB Smart Chain testnet — Solidity contracts, Hardhat deploy scripts and test suite, plus a minimal Next.js frontend for wallet connect, transfer and stake.',
+      'BEP-20 token with staking on BNB Smart Chain testnet, Solidity contracts, Hardhat deploy scripts and test suite, plus a minimal Next.js frontend for wallet connect, transfer and stake.',
     tech: ['Solidity', 'Hardhat', 'Next.js', 'BNB Chain'],
     category: ['web3'],
     github: 'https://github.com/loxleyftsck/bnb-staking-dapp',
@@ -166,7 +166,7 @@ export const projects: Project[] = [
     id: 'bonku',
     title: 'BONKU',
     description:
-      'Personal finance app aimed at Indonesian users — transactions, dashboard, bite-sized financial literacy lessons, and AI summaries. Built deliberately on free tiers end to end.',
+      'Personal finance app aimed at Indonesian users, transactions, dashboard, bite-sized financial literacy lessons, and AI summaries. Built deliberately on free tiers end to end.',
     tech: ['Next.js', 'TypeScript', 'Supabase', 'Vercel', 'Tailwind'],
     category: ['web'],
     github: 'https://github.com/loxleyftsck/BONKU',
@@ -232,7 +232,7 @@ export const experiences: Experience[] = [
     year: '2022',
     title: 'Coursework',
     description:
-      'First commits. PHP assignments and lab exercises — the ordinary starting point, kept public rather than quietly deleted.',
+      'First commits. PHP assignments and lab exercises, the ordinary starting point, kept public rather than quietly deleted.',
   },
   {
     year: '2025',
@@ -244,7 +244,7 @@ export const experiences: Experience[] = [
     year: '2026',
     title: 'AI systems',
     description:
-      'Shifted from experiments to systems that hold together — RAG pipelines, multi-agent negotiation, MLOps with DVC and MLflow, a Go network scanner. 14 repos, and the habit of finishing them.',
+      'Shifted from experiments to systems that hold together, RAG pipelines, multi-agent negotiation, MLOps with DVC and MLflow, a Go network scanner. 14 repos, and the habit of finishing them.',
   },
 ];
 
