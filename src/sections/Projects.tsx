@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import { projects, filters } from '../data/portfolio';
 import type { Category, Project } from '../data/portfolio';
@@ -14,6 +14,7 @@ const orderedProjects = [
 ];
 
 export default function Projects() {
+  const reducedMotion = useReducedMotion();
   const [active, setActive] = useState<Filter>('all');
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<Project | null>(null);
@@ -62,8 +63,8 @@ export default function Projects() {
           <span>Try another tool or explore all projects.</span>
           <button type="button" className="button button-quiet" onClick={reset}>Reset filters <ArrowReset /></button>
         </div>}
-        <motion.div layout className="project-grid" data-all={active === 'all' && !search}>
-          <AnimatePresence initial={false}>
+        <motion.div layout={!reducedMotion} className="project-grid" data-all={active === 'all' && !search}>
+          <AnimatePresence initial={false} mode="popLayout">
             {filtered.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onDetails={openDetails} />)}
           </AnimatePresence>
         </motion.div>

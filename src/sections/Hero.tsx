@@ -37,7 +37,7 @@ export default function Hero() {
           </motion.div>
         </div>
         <div className="hero-visual">
-          <Suspense fallback={<img className="scene-loading" src="/art/chrome.webp" alt="" width="1280" height="853" />}>
+          <Suspense fallback={<img className="scene-loading" src={form === 'network' ? '/art/network.svg' : '/art/chrome.webp'} alt="" width="1280" height="853" />}>
             <HeroScene paused={paused} form={form} />
           </Suspense>
           <div className="scene-controls" aria-label="Interactive sculpture controls">

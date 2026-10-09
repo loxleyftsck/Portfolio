@@ -17,10 +17,11 @@ export default function Navbar() {
   const menuButton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id]'));
+
     let frame = 0;
     const update = () => {
       frame = 0;
+      const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id]'));
       const current = sections.filter(section => section.getBoundingClientRect().top <= 145).at(-1);
       setActive(current ? '#' + current.id : '#hero');
     };

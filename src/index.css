@@ -294,3 +294,15 @@ img { display: block; max-width: 100%; }
   .detail-description { font-size: 14px; }
   .detail-actions .button { width: 100%; }
 }
+
+.project-links button, .project-links .project-demo { position: relative; }
+.project-links button::after, .project-links .project-demo::after { content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+.project-links button:hover::after, .project-links button:focus-visible::after,
+.project-links .project-demo:hover::after, .project-links .project-demo:focus-visible::after { transform: scaleX(1); }
+.project-links button svg, .project-links .project-demo svg { transition: transform .25s; }
+.project-links button:hover svg, .project-links button:focus-visible svg,
+.project-links .project-demo:hover svg, .project-links .project-demo:focus-visible svg { transform: translate(3px, -3px); }
+.project-dialog[data-closing="true"] { animation: detail-exit .18s ease-in both; }
+.project-dialog[data-closing="true"]::backdrop { animation: backdrop-exit .18s ease-in both; }
+@keyframes detail-exit { to { opacity: 0; transform: translateY(12px) scale(.985); } }
+@keyframes backdrop-exit { to { background: rgb(0 0 0 / 0); backdrop-filter: blur(0); } }

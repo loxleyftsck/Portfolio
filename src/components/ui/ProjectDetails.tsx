@@ -1,10 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, X } from 'lucide-react';
 import type { Project } from '../../data/portfolio';
 import { GithubIcon } from './SocialIcons';
 
 export default function ProjectDetails({ project, onClose }: { project: Project; onClose: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const reducedMotion = useReducedMotion();
+  const [closing, setClosing] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const requestClose = () => {
+    if (closeTimer.current !== null || closing) return;
+    if (reducedMotion) { onClose(); return; }
+    setClosing(true);
+    closeTimer.current = setTimeout(onClose, 180);
+  };
   useEffect(() => {
     const element = dialog.current;
     if (!element) return;
@@ -12,23 +22,24 @@ export default function ProjectDetails({ project, onClose }: { project: Project;
     element.showModal();
     document.body.style.overflow = 'hidden';
     return () => {
+      if (closeTimer.current !== null) clearTimeout(closeTimer.current);
       element.close();
       document.body.style.overflow = previousOverflow;
     };
   }, []);
 
   return (
-    <dialog ref={dialog} className="project-dialog" aria-labelledby="project-detail-title"
-      onCancel={event => { event.preventDefault(); onClose(); }} onClick={event => {
+    <dialog ref={dialog} className="project-dialog" data-closing={closing} aria-labelledby="project-detail-title"
+      onCancel={event => { event.preventDefault(); requestClose(); }} onClick={event => {
         if (event.target === event.currentTarget) {
           const bounds = event.currentTarget.getBoundingClientRect();
           if (event.clientX < bounds.left || event.clientX > bounds.right ||
-            event.clientY < bounds.top || event.clientY > bounds.bottom) onClose();
+            event.clientY < bounds.top || event.clientY > bounds.bottom) requestClose();
         }
       }}>
       <div className="detail-topline">
         <p className="detail-eyebrow">Project overview</p>
-        <button type="button" className="icon-button" aria-label="Close project details" onClick={onClose} autoFocus>
+        <button type="button" className="icon-button" aria-label="Close project details" onClick={requestClose} autoFocus>
           <X size={20} />
         </button>
       </div>
