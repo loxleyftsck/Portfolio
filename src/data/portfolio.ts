@@ -48,11 +48,15 @@ export const projects: Project[] = [
     id: 'luminawall',
     title: 'LuminaWall',
     description:
-      'Wallpaper generator that runs entirely in your tab, chaos-theory attractors and particle physics drawn straight to Canvas, with the heavy loops compiled to WASM. No API key, no server, no upload.',
-    tech: ['Next.js 15', 'TypeScript', 'Canvas API', 'WASM', 'Tailwind v4'],
+      'A browser-based wallpaper studio with procedural styles, curated palettes, and previews for phones, tablets, and desktops. Canvas rendering runs in a Web Worker, with PNG exports up to 8K and no image uploads.',
+    tech: ['Next.js 15', 'TypeScript', 'Canvas API', 'Web Workers', 'Tailwind v4'],
     category: ['web'],
     github: 'https://github.com/loxleyftsck/LuminaWall',
     demo: 'https://lumina-wall-jet.vercel.app',
+    image: {
+      src: '/projects/luminawall-studio.webp',
+      alt: 'LuminaWall wallpaper studio showing a Misty Pine Forest wallpaper in a desktop monitor preview, with style and palette controls and PNG export',
+    },
     featured: true,
   },
   {
