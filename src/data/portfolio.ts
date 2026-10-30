@@ -7,7 +7,7 @@ export interface Project {
   description: string;
   tech: string[];
   category: Category[];
-  github: string;
+  github?: string;
   /** Live, clickable deployment. Only set when the URL actually resolves. */
   demo?: string;
   /**
@@ -22,6 +22,19 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    id: 'fotorame',
+    title: 'FotoRame',
+    description:
+      'A digital photobooth for people in different places to share a frame. The browser experience brings together room invitations, participant and pose selection, a shared countdown, and photostrip collages, with a warm editorial visual identity.',
+    tech: [],
+    category: ['web'],
+    demo: 'https://fotorame-room.loxleyherakd.chatgpt.site/',
+    image: {
+      src: '/projects/fotorame.webp',
+      alt: 'FotoRame digital photobooth homepage with a shared-photo invitation, warm brown and peach styling, and sample group photostrips',
+    },
+  },
   {
     id: 'adaptive-cdss',
     title: 'Adaptive CDSS',

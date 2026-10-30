@@ -38,7 +38,7 @@ export default function Projects() {
       <div className="shell">
         <Reveal className="section-heading">
           <h2>Experiments.<br /><span className="muted-heading">Built into systems.</span></h2>
-          <p>{projects.length} selected projects across retrieval, agents, machine learning, and the infrastructure behind them.</p>
+          <p>{projects.length} selected projects across AI systems, machine learning, and interactive web experiences.</p>
         </Reveal>
         <div className="project-toolbar">
           <div className="project-filter" role="group" aria-label="Filter projects">
