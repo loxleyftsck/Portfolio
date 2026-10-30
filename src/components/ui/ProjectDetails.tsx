@@ -52,17 +52,17 @@ export default function ProjectDetails({ project, onClose }: { project: Project;
       {project.result && <div className="detail-result">
         <h3>Reported result</h3><p>{project.result}</p>
       </div>}
-      <div className="detail-stack">
+      {project.tech.length > 0 && <div className="detail-stack">
         <h3>Built with</h3>
         <ul>{project.tech.map(tech => <li key={tech}>{tech}</li>)}</ul>
-      </div>
+      </div>}
       <div className="detail-actions">
         {project.demo && <a className="button button-primary" href={project.demo} target="_blank" rel="noopener noreferrer">
           Open live demo <ArrowUpRight size={18} />
         </a>}
-        <a className="button button-quiet" href={project.github} target="_blank" rel="noopener noreferrer">
+        {project.github && <a className="button button-quiet" href={project.github} target="_blank" rel="noopener noreferrer">
           <GithubIcon size={17} /> Explore source <ArrowUpRight size={17} />
-        </a>
+        </a>}
       </div>
     </dialog>
   );

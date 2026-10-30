@@ -59,9 +59,9 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
           {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" className="project-demo">
             Live demo <ArrowUpRight size={17} />
           </a>}
-          <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={'View ' + project.title + ' source on GitHub'}>
+          {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={'View ' + project.title + ' source on GitHub'}>
             <GithubIcon size={15} /> Source <ArrowUpRight size={15} />
-          </a>
+          </a>}
         </div>
       </div>
     </motion.article>
