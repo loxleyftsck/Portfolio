@@ -75,12 +75,17 @@ export const projects: Project[] = [
   },
   {
     id: 'indogovrag',
-    title: 'IndoGovRAG',
+    title: 'Acuan (formerly IndoGovRAG)',
     description:
-      'Retrieval over Indonesian government documents, which are long, formally structured, and break naive chunkers. Custom chunking tuned to that structure, FAISS search, FastAPI on top.',
-    tech: ['Python', 'LangChain', 'FAISS', 'FastAPI', 'Docker'],
-    category: ['rag'],
+      'The latest evolution of IndoGovRAG: Indonesian regulation research with traceable source excerpts. This standalone portfolio demo uses BM25, curated synonyms, and extractive summaries over a bundled corpus; it does not run the full RAG or LLM pipeline.',
+    tech: ['Next.js', 'TypeScript', 'BM25', 'Vercel'],
+    category: ['rag', 'web'],
     github: 'https://github.com/loxleyftsck/IndoGovRAG',
+    demo: 'https://acuan-portfolio-demo.vercel.app/',
+    image: {
+      src: '/projects/acuan-demo.webp',
+      alt: 'Acuan portfolio demo homepage with Indonesian regulation search, example queries, and an explicit notice that summaries are extractive without AI generation',
+    },
   },
   {
     id: 'careeros',
