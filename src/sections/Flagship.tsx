@@ -10,7 +10,7 @@ const studies = [
     approach: 'The portfolio demo searches a curated corpus with BM25 and returns extractive passages linked to their source.',
     evidence: '20 documents · 148 passages · curated snapshot, 24 Oct 2026',
     note: 'Standalone demo: no generative AI or full RAG pipeline. OCR text has not been verified against official documents.',
-    imageLabel: 'LIVE DEMO / REGULATION SEARCH',
+    imageLabel: 'LIVE DEMO / REGULATION SEARCH', flow: ['Query', 'BM25 search', 'Source excerpts'],
   },
   {
     id: 'transit-demand', number: '02', label: 'TIME-SERIES FORECASTING', title: 'Transit Demand Forecasting',
@@ -19,7 +19,7 @@ const studies = [
     approach: 'A reproducible pipeline cleans hourly MTA data, trains LightGBM, and compares its predictions with a last-week baseline.',
     evidence: '≈7.5 GB raw data · 428 stations · hourly forecasts',
     note: 'The visual shows a held-out station comparison. Results depend on the evaluation period and baseline.',
-    imageLabel: 'EVALUATION / ACTUAL VS PREDICTED',
+    imageLabel: 'EVALUATION / ACTUAL VS PREDICTED', flow: ['MTA data', 'LightGBM', 'Baseline comparison'],
   },
   {
     id: 'microllm', number: '03', label: 'PRIVATE INFERENCE', title: 'MicroLLM-PrivateStack',
@@ -28,7 +28,7 @@ const studies = [
     approach: 'A private inference stack combines an API layer, caching, inference, validation, and audit logging.',
     evidence: 'Local inference · API layer · security controls',
     note: 'Architecture diagram from the project repository. Resource requirements and security coverage depend on the configuration.',
-    imageLabel: 'ARCHITECTURE / PRIVATE LLM STACK',
+    imageLabel: 'ARCHITECTURE / PRIVATE LLM STACK', flow: ['API', 'Cache / inference', 'Audit log'],
   },
 ] as const;
 
@@ -48,6 +48,7 @@ export default function Flagship() {
               <div className="flagship-meta"><span>CASE STUDY / {study.number}</span><span>{study.label}</span></div>
               <h3>{study.title}</h3><p className="flagship-lead">{study.lead}</p>
               <dl className="flagship-story"><div><dt>THE QUESTION</dt><dd>{study.problem}</dd></div><div><dt>THE APPROACH</dt><dd>{study.approach}</dd></div></dl>
+              <div className="case-flow"><p>PROCESS / SIMPLIFIED</p><ol>{study.flow.map(step => <li key={step}>{step}</li>)}</ol></div>
               <p className="flagship-evidence">{study.evidence}</p>
               <div className="flagship-actions">
                 {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer">Live demo <ArrowUpRight size={15} /></a>}
