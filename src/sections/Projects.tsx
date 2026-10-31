@@ -6,6 +6,7 @@ import type { Category, Project } from '../data/portfolio';
 import ProjectCard from '../components/ui/ProjectCard';
 import ProjectDetails from '../components/ui/ProjectDetails';
 import Reveal from '../components/ui/Reveal';
+import Flagship from './Flagship';
 
 type Filter = 'all' | Category;
 const orderedProjects = [
@@ -36,6 +37,7 @@ export default function Projects() {
   return (
     <section id="projects" className="section projects-section">
       <div className="shell">
+        <Flagship />
         <Reveal className="section-heading">
           <h2>Experiments.<br /><span className="muted-heading">Built into systems.</span></h2>
           <p>{projects.length} selected projects across AI systems, machine learning, and interactive web experiences.</p>
