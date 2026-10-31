@@ -107,6 +107,8 @@ export default function HeroScene({ paused, form }: HeroSceneProps) {
     });
     const signalPoint = new THREE.Vector3();
     const signalMatrix = new THREE.Matrix4();
+    const signalScale = new THREE.Vector3();
+    const signalRotation = new THREE.Quaternion();
     network.add(signals);
 
     // Deterministic particles: identical composition across reloads.
@@ -178,8 +180,12 @@ export default function HeroScene({ paused, form }: HeroSceneProps) {
       for (let index = 0; index < signalPaths.length; index++) {
         const [start, end] = signalPaths[index];
         const progress = (time * 0.35 + index / signalPaths.length) % 1;
-        signalPoint.lerpVectors(start, end, progress);
-        signals.setMatrixAt(index, signalMatrix.makeTranslation(signalPoint.x, signalPoint.y, signalPoint.z));
+        // Fade each signal in and out at its endpoints so it appears to arrive at a node.
+        const pulse = Math.sin(Math.PI * progress);
+        const easedProgress = progress * progress * (3 - 2 * progress);
+        signalPoint.lerpVectors(start, end, easedProgress);
+        signalScale.setScalar(0.12 + pulse * 0.88);
+        signals.setMatrixAt(index, signalMatrix.compose(signalPoint, signalRotation, signalScale));
       }
       signals.instanceMatrix.needsUpdate = true;
       sculpture.rotation.y = time * 0.16 + pointer.x * 0.25;

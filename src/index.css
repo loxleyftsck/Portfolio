@@ -350,3 +350,11 @@ img { display: block; max-width: 100%; }
 .profile-caption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 13px; color: var(--subtle); font: 9px/1.6 'IBM Plex Mono', monospace; letter-spacing: .05em; }
 .profile-caption span:first-child { color: var(--accent); }
 @media (max-width: 600px) { .profile-asset { width: 64%; max-width: 250px; } .case-flow li { font-size: 9px; } }
+
+/* Quiet emphasis for flagship interactions. */
+.flagship-image img { transition: transform .55s cubic-bezier(.22, 1, .36, 1); }
+.flagship-case:hover .flagship-image img, .flagship-case:focus-within .flagship-image img { transform: scale(1.025); }
+.flagship-actions a svg { transition: transform .25s; }
+.flagship-actions a:hover svg, .flagship-actions a:focus-visible svg { transform: translate(3px, -3px); }
+@media (hover: none) { .flagship-case:hover .flagship-image img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .flagship-image img, .flagship-actions a svg { transition: none; } .flagship-case:hover .flagship-image img, .flagship-case:focus-within .flagship-image img { transform: none; } }
