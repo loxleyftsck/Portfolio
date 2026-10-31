@@ -81,8 +81,8 @@ export const projects: Project[] = [
     category: ['rag', 'infra'],
     github: 'https://github.com/loxleyftsck/MicroLLM-PrivateStack',
     image: {
-      src: '/projects/microllm-arch.jpg',
-      alt: 'Architecture diagram: API layer with JWT auth and OWASP ASVS L2 validation, splitting into a Redis semantic cache and the inference engine, then post-processing and audit logging',
+      src: '/projects/microllm-flow.svg',
+      alt: 'Simplified MicroLLM diagram showing a request through an API layer, cache and local inference to a response, with audit logging. Configuration may vary.',
     },
   },
   {

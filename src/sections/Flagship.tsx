@@ -27,7 +27,7 @@ const studies = [
     problem: 'Running an LLM locally requires trade-offs between available memory, inference speed, and application security.',
     approach: 'A private inference stack combines an API layer, caching, inference, validation, and audit logging.',
     evidence: 'Local inference · API layer · security controls',
-    note: 'Architecture diagram from the project repository. Resource requirements and security coverage depend on the configuration.',
+    note: 'Simplified illustration of the serving flow. Resource requirements and security coverage depend on the configuration.',
     imageLabel: 'ARCHITECTURE / PRIVATE LLM STACK', flow: ['API', 'Cache / inference', 'Audit log'],
   },
 ] as const;
