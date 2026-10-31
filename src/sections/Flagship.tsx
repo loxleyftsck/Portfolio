@@ -17,8 +17,8 @@ const studies = [
     lead: 'Forecast the next hour, station by station.',
     problem: 'Transit planning depends on knowing when and where passenger demand changes across a large network.',
     approach: 'A reproducible pipeline cleans hourly MTA data, trains LightGBM, and compares its predictions with a last-week baseline.',
-    evidence: '≈7.5 GB raw data · 428 stations · hourly forecasts',
-    note: 'The visual shows a held-out station comparison. Results depend on the evaluation period and baseline.',
+    evidence: 'Test MAE: 25.06 LightGBM vs 42.24 last-week baseline · 428 stations',
+    note: 'MAE is measured across the full test set; the chart shows one station. Results depend on the evaluation period and baseline.',
     imageLabel: 'EVALUATION / ACTUAL VS PREDICTED', flow: ['MTA data', 'LightGBM', 'Baseline comparison'],
   },
   {
