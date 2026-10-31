@@ -259,13 +259,13 @@ export const experiences: Experience[] = [
     year: '2025',
     title: 'Research, then everything else',
     description:
-      'Context-aware DTN routing in Java on THE ONE simulator became the thread I pulled hardest. Alongside it: first ML notebooks, LSTM tuning, and a Solidity staking contract on BNB testnet out of curiosity. 13 repos.',
+      'Context-aware DTN routing in Java on THE ONE simulator became the thread I pulled hardest. Alongside it: first ML notebooks, LSTM tuning, and a Solidity staking contract on BNB testnet out of curiosity.',
   },
   {
     year: '2026',
     title: 'AI systems',
     description:
-      'Shifted from experiments to systems that hold together, RAG pipelines, multi-agent negotiation, MLOps with DVC and MLflow, a Go network scanner. 14 repos, and the habit of finishing them.',
+      'Shifted from experiments to systems that hold together, RAG pipelines, multi-agent negotiation, MLOps with DVC and MLflow, and a Go network scanner.',
   },
 ];
 
@@ -275,14 +275,6 @@ export const social = {
   linkedin: 'https://www.linkedin.com/in/herald-michain-samuel-theo-ginting-9b70762a3/',
   email: 'heraldmsamueltheo@gmail.com',
 };
-
-// ─── STATS ───────────────────────────────────────────────────────────────────
-// Verified against the GitHub API, 30 July 2026. Update alongside the profile.
-export const stats = [
-  { val: '28', label: 'Public repositories' },
-  { val: '7', label: 'Languages shipped in' },
-  { val: '2022', label: 'First commit' },
-];
 
 export const meta = {
   name: 'Herald Ginting',

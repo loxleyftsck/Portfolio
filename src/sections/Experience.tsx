@@ -7,7 +7,7 @@ export default function Experience() {
       <div className="shell">
         <Reveal className="section-heading">
           <h2>Always curious.<br /><span className="muted-heading">Still building.</span></h2>
-          <p>Four years of commit history, condensed. The early work is still public.</p>
+          <p>A journey from early coursework to AI systems. The early work is still public.</p>
         </Reveal>
         <div className="experience-grid">
           {experiences.map((item, index) => <Reveal key={item.year} delay={index * 0.08} className="experience-item">
