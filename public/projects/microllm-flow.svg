@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">MicroLLM private serving overview</title><desc id="desc">A simplified diagram showing a request entering an API layer, a cache and inference stage, and a response with audit logging.</desc>
+<rect width="1200" height="800" rx="24" fill="#101115"/>
+<g stroke="#292a31" stroke-width="1" opacity=".55"><path d="M0 100h1200M0 200h1200M0 300h1200M0 400h1200M0 500h1200M0 600h1200M0 700h1200"/><path d="M100 0v800M200 0v800M300 0v800M400 0v800M500 0v800M600 0v800M700 0v800M800 0v800M900 0v800M1000 0v800M1100 0v800"/></g>
+<text x="65" y="82" fill="#ff986c" font-family="monospace" font-size="19" letter-spacing="3">MICROLLM / SYSTEM OVERVIEW</text>
+<text x="65" y="140" fill="#f3f2ee" font-family="sans-serif" font-size="38">A private inference flow.</text>
+<g fill="#17191f" stroke="#5b5d67" stroke-width="2"><rect x="65" y="225" width="225" height="175" rx="12"/><rect x="360" y="225" width="225" height="175" rx="12"/><rect x="655" y="225" width="225" height="175" rx="12"/><rect x="950" y="225" width="185" height="175" rx="12"/><rect x="655" y="515" width="225" height="125" rx="12"/></g>
+<g stroke="#ff8650" stroke-width="3" fill="none"><path d="M290 312h70M585 312h70M880 312h70M767 400v115"/></g>
+<g fill="#ff8650"><circle cx="325" cy="312" r="5"/><circle cx="620" cy="312" r="5"/><circle cx="915" cy="312" r="5"/><circle cx="767" cy="458" r="5"/></g>
+<g fill="#e8e8e9" font-family="sans-serif" font-size="25"><text x="89" y="292">Request</text><text x="384" y="292">API layer</text><text x="679" y="292">Cache / model</text><text x="974" y="292">Response</text><text x="679" y="568">Audit logging</text></g>
+<g fill="#a6a8b1" font-family="monospace" font-size="15"><text x="89" y="335">CLIENT INPUT</text><text x="384" y="335">VALIDATION</text><text x="679" y="335">LOCAL INFERENCE</text><text x="974" y="335">OUTPUT</text><text x="679" y="606">TRACEABLE EVENTS</text></g>
+<text x="65" y="742" fill="#a6a8b1" font-family="monospace" font-size="17">SIMPLIFIED DIAGRAM / CONFIGURATION MAY VARY</text>
+</svg>
