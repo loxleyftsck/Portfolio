@@ -36,7 +36,7 @@ export default function Flagship() {
   return <div className="flagship" aria-labelledby="flagship-title">
     <Reveal className="flagship-heading">
       <div><p className="flagship-kicker">SELECTED CASE STUDIES / 01—03</p><h2 id="flagship-title">A closer look.<br /><span className="muted-heading">From idea to system.</span></h2></div>
-      <p>Three projects, three different questions. A look at the problems, decisions, and evidence behind the work.</p>
+      <div className="flagship-intro"><p>Three projects, three different questions. A look at the problems, decisions, and evidence behind the work.</p><a href="#all-projects">Browse all projects <ArrowUpRight size={15} /></a></div>
     </Reveal>
     <div className="flagship-list">
       {studies.map(study => {

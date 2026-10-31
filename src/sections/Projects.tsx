@@ -39,7 +39,7 @@ export default function Projects() {
       <div className="shell">
         <Flagship />
         <Reveal className="section-heading">
-          <h2>Experiments.<br /><span className="muted-heading">Built into systems.</span></h2>
+          <h2 id="all-projects" tabIndex={-1}>Experiments.<br /><span className="muted-heading">Built into systems.</span></h2>
           <p>{projects.length} selected projects across AI systems, machine learning, and interactive web experiences.</p>
         </Reveal>
         <div className="project-toolbar">
