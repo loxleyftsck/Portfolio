@@ -7,8 +7,11 @@ export default function About() {
     <section id="about" className="section about-section">
       <div className="shell">
         <Reveal className="about-intro">
-          <div className="portrait-frame">
+          <div className="profile-asset">
+            <div className="portrait-frame">
             <img src="/portrait.webp" alt={meta.fullName} width="720" height="960" loading="lazy" decoding="async" />
+            </div>
+            <div className="profile-caption"><span>HG / RESEARCH PROFILE</span><span>JAKARTA, ID</span></div>
           </div>
           <div className="about-copy">
             <h2>What I actually<br /><span className="muted-heading">work on.</span></h2>
