@@ -112,9 +112,9 @@ export const projects: Project[] = [
     id: 'stockflowml',
     title: 'StockFlowML',
     description:
-      'Next-day trend prediction on Indonesian exchange data, built mostly as an excuse to do the MLOps properly: DVC-versioned data, MLflow runs, and a GitHub Actions job that retrains weekly without me.',
+      'Next-day trend prediction on Indonesian exchange data, with DVC-versioned data, model evaluation, and a scheduled GitHub Actions retraining workflow. The most recent workflow runs failed during job setup and need investigation.',
     tech: ['Python', 'DVC', 'MLflow', 'GitHub Actions', 'Docker'],
-    result: 'Automated weekly retraining pipeline, fully reproducible runs',
+    result: 'Scheduled retraining configured; latest recorded runs failed during setup (June 2026)',
     category: ['ml', 'infra'],
     github: 'https://github.com/loxleyftsck/StockFlowML',
     image: {
@@ -289,7 +289,7 @@ export const meta = {
   fullName: 'Herald Michain Samuel Theo Ginting',
   title: 'AI Engineer',
   tagline:
-    'I build retrieval and multi-agent systems, and the MLOps plumbing that keeps them reproducible. Everything here is open source.',
+    'I build retrieval and multi-agent systems, and the MLOps plumbing that keeps them reproducible. Explore the projects and live demos below.',
   location: 'Jakarta, Indonesia',
   available: true,
 };
