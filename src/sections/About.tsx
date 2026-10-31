@@ -14,10 +14,12 @@ export default function About() {
             <div className="profile-caption"><span>HG / RESEARCH PROFILE</span><span>JAKARTA, ID</span></div>
           </div>
           <div className="about-copy">
-            <h2>What I actually<br /><span className="muted-heading">work on.</span></h2>
-            <p>Most of my work sits in the same place: a model that has to make a decision on incomplete information, and the retrieval or agent scaffolding that gets it enough context to try.</p>
-            <p>That started with routing in disconnected networks, and turned into RAG pipelines, negotiating agents, and clinical decision support. DVC, MLflow, and scheduled retraining keep the work reproducible.</p>
-            <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">More about me <ArrowUpRight size={17} /></a>
+            <p className="about-kicker">THE PERSON BEHIND THE SYSTEMS / 01</p>
+            <h2>Curious about<br /><span className="muted-heading">how things connect.</span></h2>
+            <p>My work began with routing in disconnected networks: how can a message find its way when there is no reliable path? That question grew into an interest in systems that make decisions with incomplete information.</p>
+            <p>Today I explore retrieval, multi-agent systems, and applied machine learning. I enjoy working through the full process: shaping the data, building a useful interface, and making experiments easier to reproduce.</p>
+            <div className="about-notes"><span>RETRIEVAL & SOURCES</span><span>MULTI-AGENT SYSTEMS</span><span>REPRODUCIBLE ML</span></div>
+            <a href={social.linkedin} target="_blank" rel="noopener noreferrer" className="text-link">Connect on LinkedIn <ArrowUpRight size={17} /></a>
           </div>
         </Reveal>
         <div className="skills-grid">
