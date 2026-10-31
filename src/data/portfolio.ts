@@ -76,9 +76,8 @@ export const projects: Project[] = [
     id: 'microllm',
     title: 'MicroLLM-PrivateStack',
     description:
-      'A private LLM stack for hardware nobody wants to run LLMs on. Sliding-window attention, memory mapping and prompt-prefix caching to fit in 2GB RAM, with OWASP ASVS L2 controls on the serving layer.',
+      'A local LLM serving stack with an API layer, inference optimizations, caching, input validation, and audit logging. Memory use and security coverage depend on the deployment configuration.',
     tech: ['Python', 'FastAPI', 'Ollama', 'Docker', 'React'],
-    result: 'Serves on 2GB RAM under OWASP ASVS L2 controls',
     category: ['rag', 'infra'],
     github: 'https://github.com/loxleyftsck/MicroLLM-PrivateStack',
     image: {
