@@ -52,7 +52,7 @@ export default function Flagship() {
               <p className="flagship-evidence">{study.evidence}</p>
               <div className="flagship-actions">
                 {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer">Live demo <ArrowUpRight size={15} /></a>}
-                {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer">View source <ArrowUpRight size={15} /></a>}
+                {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer">{project.githubLabel ?? 'View source'} <ArrowUpRight size={15} /></a>}
               </div>
             </div>
             <figure className="flagship-figure"><div className="flagship-image"><img src={project.image.src} alt={project.image.alt} loading="lazy" decoding="async" /></div><figcaption><span>{study.imageLabel}</span><span>{study.note}</span></figcaption></figure>
