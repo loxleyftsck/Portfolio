@@ -40,6 +40,10 @@ export default function Hero() {
           <Suspense fallback={<img className="scene-loading" src={form === 'network' ? '/art/network.svg' : '/art/chrome.webp'} alt="" width="1280" height="853" />}>
             <HeroScene paused={paused} form={form} />
           </Suspense>
+          <p className="scene-caption" aria-hidden="true">
+            <span>{form === 'network' ? '02 / NETWORK' : '01 / CHROME'}</span>
+            {form === 'network' ? 'Signals between nodes' : 'A study in motion'}
+          </p>
           <div className="scene-controls" aria-label="Interactive sculpture controls">
             <div className="scene-forms" role="group" aria-label="Sculpture form">
               <button type="button" aria-pressed={form === 'chrome'} onClick={() => setForm('chrome')}>Chrome</button>
