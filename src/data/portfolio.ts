@@ -138,7 +138,7 @@ export const projects: Project[] = [
     description:
       'Hourly ridership per station on real MTA data. Most of the work was the unglamorous part, profiling and cleaning ~7.5 GB before LightGBM saw any of it, then Optuna tuning tracked in MLflow.',
     tech: ['Python', 'LightGBM', 'Optuna', 'MLflow', 'Pandas'],
-    result: 'Cleaned ~7.5 GB of raw MTA data; beats naive baseline',
+    result: 'Full test-set MAE: 25.06 LightGBM vs 42.24 last-week baseline',
     category: ['ml'],
     github: 'https://github.com/loxleyftsck/transit-demand-forecasting',
     demo: 'https://transit-demand-forecasting-portfoli.vercel.app',
