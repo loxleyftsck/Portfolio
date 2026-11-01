@@ -263,9 +263,16 @@ img { display: block; max-width: 100%; }
 .project-count { color: var(--subtle); font: 10px 'IBM Plex Mono', monospace; margin: 22px 0 32px; }
 .project-links button { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0; border: 0; background: transparent; color: var(--fg); font-size: 12px; transition: color .2s; }
 .project-links button:hover { color: var(--accent); }
-.project-empty { border-block: 1px solid var(--line); padding: 48px 0; }
-.project-empty p { font-size: 24px; letter-spacing: -.04em; margin: 0 0 10px; }
-.project-empty > span { display: block; color: var(--muted); font-size: 14px; margin-bottom: 25px; }
+.project-empty { display: grid; grid-template-columns: minmax(120px, .5fr) 1fr; gap: 36px; border-block: 1px solid var(--line); padding: 44px 0 48px; }
+.empty-marker { display: flex; flex-direction: column; gap: 12px; color: var(--accent); font: 10px/1.4 'IBM Plex Mono', monospace; letter-spacing: .06em; }
+.empty-marker strong { color: transparent; -webkit-text-stroke: 1px var(--subtle); font: 500 clamp(80px, 10vw, 130px)/.8 'Space Grotesk', sans-serif; letter-spacing: -.08em; }
+.empty-content > p { font-size: 24px; letter-spacing: -.04em; margin: 0 0 10px; }
+.empty-content > span { display: block; color: var(--muted); font-size: 14px; }
+.empty-suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 26px; }
+.empty-suggestions button { min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 3px; background: transparent; color: var(--fg); font: 11px 'IBM Plex Mono', monospace; transition: border-color .2s, color .2s; }
+.empty-suggestions button:hover { color: var(--accent); border-color: var(--accent); }
+.empty-suggestions button span { color: var(--accent); margin-left: 6px; }
+@media (max-width: 600px) { .project-empty { grid-template-columns: 1fr; gap: 24px; padding: 32px 0; } .empty-marker { flex-direction: row; align-items: baseline; } .empty-marker strong { font-size: 64px; } }
 .project-dialog { width: min(760px, calc(100% - 40px)); max-height: calc(100dvh - 48px); padding: 32px 40px 40px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); color: var(--fg); overscroll-behavior: contain; }
 .project-dialog::backdrop { background: rgb(0 0 0 / .72); backdrop-filter: blur(8px); }
 .project-dialog[open] { animation: detail-enter .3s cubic-bezier(.22, 1, .36, 1); }
