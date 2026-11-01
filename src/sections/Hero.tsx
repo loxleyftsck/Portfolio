@@ -1,15 +1,22 @@
 import { GithubIcon } from '../components/ui/SocialIcons';
-import { lazy, Suspense, useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { lazy, Suspense, useState, useSyncExternalStore } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, Pause, Play } from 'lucide-react';
 import { meta, social } from '../data/portfolio';
 
 const HeroScene = lazy(() => import('../components/visuals/HeroScene'));
+const motionQuery = '(prefers-reduced-motion: reduce)';
+const subscribeMotion = (onChange: () => void) => {
+  const media = window.matchMedia(motionQuery);
+  media.addEventListener('change', onChange);
+  return () => media.removeEventListener('change', onChange);
+};
+const readReducedMotion = () => window.matchMedia(motionQuery).matches;
 
 export default function Hero() {
   const [paused, setPaused] = useState(false);
   const [form, setForm] = useState<'chrome' | 'network'>('chrome');
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useSyncExternalStore(subscribeMotion, readReducedMotion, () => false);
 
   return (
     <section id="hero" className="hero">
@@ -50,8 +57,10 @@ export default function Hero() {
               <button type="button" aria-pressed={form === 'network'} onClick={() => setForm('network')}>Network</button>
             </div>
             <button type="button" className="scene-pause" onClick={() => setPaused(value => !value)}
-              aria-pressed={paused} aria-label={paused ? 'Resume sculpture animation' : 'Pause sculpture animation'}>
-              {paused ? <Play size={15} /> : <Pause size={15} />}
+              aria-label={reducedMotion ? 'Animation off: reduced motion enabled in device settings' : paused ? 'Resume sculpture animation' : 'Pause sculpture animation'}
+              disabled={reducedMotion} title={reducedMotion ? 'Animation is off because reduced motion is enabled in your device settings.' : undefined}>
+              {paused && !reducedMotion ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
+              <span>{reducedMotion ? 'Motion off' : paused ? 'Resume' : 'Pause'}</span>
             </button>
           </div>
         </div>

@@ -94,8 +94,9 @@ img { display: block; max-width: 100%; }
 .scene-forms { display: flex; padding: 4px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
 .scene-forms button { min-height: 36px; padding: 0 16px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 10px; transition: color .2s, background .2s; }
 .scene-forms button[aria-pressed="true"] { background: var(--surface); color: var(--fg); }
-.scene-pause { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--bg); color: var(--muted); }
-.scene-pause:hover { color: var(--accent); }
+.scene-pause { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 13px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--muted); font: 10px 'IBM Plex Mono', monospace; }
+.scene-pause:hover:not(:disabled) { color: var(--accent); }
+.scene-pause:disabled { cursor: default; }
 .hero-bottom { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; padding-top: 70px; margin-top: auto; color: var(--subtle); font: 11px 'IBM Plex Mono', monospace; }
 .availability { display: flex; align-items: center; gap: 10px; }
 .availability span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
