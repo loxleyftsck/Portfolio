@@ -47,7 +47,7 @@ export default function ProjectDetails({ project, onClose }: { project: Project;
       <p className="detail-description">{project.description}</p>
       {project.image && <figure className="detail-evidence">
         <img src={project.image.src} alt={project.image.alt} decoding="async" />
-        <figcaption>{project.image.alt}</figcaption>
+        <figcaption>{project.image.caption ?? project.image.alt}</figcaption>
       </figure>}
       {project.result && <div className="detail-result">
         <h3>Reported result</h3><p>{project.result}</p>

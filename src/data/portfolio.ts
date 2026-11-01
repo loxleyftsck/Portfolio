@@ -17,7 +17,7 @@ export interface Project {
    * Never a stock photo, an illustration, or an AI-generated mockup, a card
    * with no image is better than a card with a decorative one.
    */
-  image?: { src: string; alt: string };
+  image?: { src: string; alt: string; caption?: string };
   /** Only set when there is a real measured number to report. */
   result?: string;
   featured?: boolean;
@@ -148,6 +148,7 @@ export const projects: Project[] = [
     image: {
       src: '/projects/transit-pred.jpg',
       alt: 'Test-set plot for Times Sq-42 St: actual hourly entries against tuned LightGBM predictions and a last-week naive baseline, March to May 2024',
+      caption: 'The chart shows Times Sq–42 St from March to May 2024. The MAE below covers the full test set, not just this station.',
     },
   },
   {
