@@ -61,7 +61,7 @@ export default function ProjectDetails({ project, onClose }: { project: Project;
           Open live demo <ArrowUpRight size={18} />
         </a>}
         {project.github && <a className="button button-quiet" href={project.github} target="_blank" rel="noopener noreferrer">
-          <GithubIcon size={17} /> Explore source <ArrowUpRight size={17} />
+          <GithubIcon size={17} /> {project.githubLabel ?? 'Explore source'} <ArrowUpRight size={17} />
         </a>}
       </div>
     </dialog>

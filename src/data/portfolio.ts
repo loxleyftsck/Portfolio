@@ -8,6 +8,8 @@ export interface Project {
   tech: string[];
   category: Category[];
   github?: string;
+  /** Label for a related repository when it is not the demo source. */
+  githubLabel?: string;
   /** Live, clickable deployment. Only set when the URL actually resolves. */
   demo?: string;
   /**
@@ -93,6 +95,7 @@ export const projects: Project[] = [
     tech: ['Next.js', 'TypeScript', 'BM25', 'Vercel'],
     category: ['rag', 'web'],
     github: 'https://github.com/loxleyftsck/IndoGovRAG',
+    githubLabel: 'IndoGovRAG source',
     demo: 'https://acuan-portfolio-demo.vercel.app/',
     image: {
       src: '/projects/acuan-demo.webp',
