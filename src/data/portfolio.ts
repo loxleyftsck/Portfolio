@@ -12,11 +12,7 @@ export interface Project {
   githubLabel?: string;
   /** Live, clickable deployment. Only set when the URL actually resolves. */
   demo?: string;
-  /**
-   * Only set when a real screenshot or diagram exists in the project's repo.
-   * Never a stock photo, an illustration, or an AI-generated mockup, a card
-   * with no image is better than a card with a decorative one.
-   */
+  /** Project screenshot or clearly labeled explanatory diagram. */
   image?: { src: string; alt: string; caption?: string };
   /** Only set when there is a real measured number to report. */
   result?: string;
@@ -57,6 +53,11 @@ export const projects: Project[] = [
     result: 'Converges toward Nash equilibrium price in bilateral bargaining',
     category: ['agents', 'ml'],
     github: 'https://github.com/loxleyftsck/EquilibriumX-Multi-Agent-Negotiation-Sandbox',
+    image: {
+      src: '/projects/equilibrium-concept.svg',
+      alt: 'Conceptual illustration of reinforcement learning strategy, an LLM message, and repeated negotiation rounds.',
+      caption: 'A simplified illustration based on the project description, not an implementation diagram.',
+    },
     featured: true,
   },
   {
