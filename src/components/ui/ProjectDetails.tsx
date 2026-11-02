@@ -8,6 +8,8 @@ export default function ProjectDetails({ project, onClose }: { project: Project;
   const dialog = useRef<HTMLDialogElement>(null);
   const reducedMotion = useReducedMotion();
   const [closing, setClosing] = useState(false);
+  const [activeImage, setActiveImage] = useState(0);
+  const currentImage = project.gallery?.[activeImage] ?? project.image;
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const requestClose = () => {
     if (closeTimer.current !== null || closing) return;
@@ -45,10 +47,23 @@ export default function ProjectDetails({ project, onClose }: { project: Project;
       </div>
       <h2 id="project-detail-title">{project.title}</h2>
       <p className="detail-description">{project.description}</p>
-      {project.image && <figure className="detail-evidence">
-        <img src={project.image.src} alt={project.image.alt} decoding="async" />
-        <figcaption>{project.image.caption ?? project.image.alt}</figcaption>
+      {currentImage && <figure className="detail-evidence">
+        <img src={currentImage.src} alt={currentImage.alt} decoding="async" />
+        <figcaption>{currentImage.caption ?? currentImage.alt}</figcaption>
       </figure>}
+      {project.gallery && <div className="detail-gallery" role="group" aria-label="Project screenshots">
+        {project.gallery.map((image, index) => <button type="button" key={image.src}
+          aria-pressed={activeImage === index} onClick={() => setActiveImage(index)}>
+          <img src={image.src} alt="" loading="lazy" decoding="async" />
+          <span>{image.label}</span>
+        </button>)}
+      </div>}
+      {project.caseStudy && <div className="detail-result">
+        <h3>Problem</h3><p>{project.caseStudy.problem}</p>
+        <h3>Approach</h3><p>{project.caseStudy.approach}</p>
+        <h3>My contribution</h3><p>{project.caseStudy.contribution}</p>
+        <h3>Outcome</h3><p>{project.caseStudy.outcome}</p>
+      </div>}
       {project.result && <div className="detail-result">
         <h3>Reported result</h3><p>{project.result}</p>
       </div>}

@@ -14,12 +14,68 @@ export interface Project {
   demo?: string;
   /** Project screenshot or clearly labeled explanatory diagram. */
   image?: { src: string; alt: string; caption?: string };
+  gallery?: { src: string; alt: string; caption: string; label: string }[];
   /** Only set when there is a real measured number to report. */
   result?: string;
   featured?: boolean;
+  caseStudy?: { problem: string; approach: string; contribution: string; outcome: string };
 }
 
 export const projects: Project[] = [
+  {
+    id: 'monitor-forecast-diagnose',
+    title: 'Monitor. Forecast. Diagnose.',
+    description:
+      'A collaborative infrastructure monitoring application that brings hardware telemetry, short-term temperature forecasts, alerts, and diagnostic assistance together in one dashboard.',
+    tech: ['Python', 'FastAPI', 'PostgreSQL', 'SQLite', 'LightGBM', 'Chart.js'],
+    category: ['ml', 'infra', 'agents'],
+    image: {
+      src: '/projects/monitoring-landing.png',
+      alt: 'THETA Monitoring landing page introducing the Monitor, Forecast, Diagnose platform.',
+      caption: 'Landing page introducing the monitoring, forecasting, and diagnostic workflow.',
+    },
+    gallery: [
+      { src: '/projects/monitoring-landing.png', label: 'Landing', alt: 'THETA Monitoring landing page with the headline Monitor, Forecast, Diagnose.', caption: 'Landing page introducing the monitoring platform.' },
+      { src: '/projects/monitoring-analytics-live.png', label: 'Analytics', alt: 'Monitoring analytics view showing host status and temperatures by rack.', caption: 'Analytics view showing host status and rack temperatures.' },
+      { src: '/projects/monitoring-assistant-live.png', label: 'Diagnosis', alt: 'Diagnostic assistant showing an analysis of host telemetry.', caption: 'Diagnostic assistant analyzing host telemetry and temperature forecasts.' },
+      { src: '/projects/monitoring-settings-live.png', label: 'Settings', alt: 'Monitoring settings showing thermal thresholds and assistant status.', caption: 'Settings view for thermal thresholds and diagnostic assistant status.' },
+      { src: '/projects/monitoring-overview.png', label: 'Overview', alt: 'Archived monitoring overview with host telemetry and temperature forecasts.', caption: 'Archived capture: host status, sensor readings and thermal forecasts.' },
+      { src: '/projects/monitoring-hosts.png', label: 'Hosts', alt: 'Archived rack and host monitoring view with some network identifiers redacted.', caption: 'Archived capture: rack inventory and host reporting status; some identifiers are redacted.' },
+      { src: '/projects/monitoring-alerts.png', label: 'Alerts', alt: 'Archived hardware alert investigation view with some identifiers redacted.', caption: 'Archived capture: alerts and investigation actions; some identifiers are redacted.' },
+      { src: '/projects/monitoring-diagnostic.png', label: 'Assistant', alt: 'Archived diagnostic assistant response comparing rack temperatures, with some identifiers redacted.', caption: 'Archived capture: a diagnostic assistant response; some identifiers are redacted.' },
+    ],
+    caseStudy: {
+      problem: 'Infrastructure operators need a clear view of device health, thermal warnings, and the context needed to investigate them.',
+      approach: 'The team combined telemetry dashboards, short-term temperature forecasts, alerts, and diagnostic assistance grounded in available monitoring evidence.',
+      contribution: 'I contributed to dashboard views, monitoring status consistency, diagnostic assistant improvements, testing, and technical documentation.',
+      outcome: 'The project includes a monitoring application, forecasting models, tests, documentation, and archived captures of the dashboard and diagnostic workflow.',
+    },
+  },
+  {
+    id: 'time-series-forecasting-dashboard',
+    title: 'Time-Series Forecasting Dashboard',
+    description:
+      'A collaborative forecasting application for exploring historical data, comparing model predictions, and working with uploaded datasets. I selected and trained stock forecasting models and contributed to the dashboard, API, and chatbot integration.',
+    tech: ['Python', 'Next.js', 'FastAPI', 'React', 'Recharts'],
+    category: ['ml', 'web'],
+    image: {
+      src: '/projects/forecasting-dashboard.jpg',
+      alt: 'Stock forecasting dashboard showing model selection, forecast metrics, and a chart of actual and predicted prices.',
+      caption: 'Stock forecasting dashboard showing model selection and historical predictions.',
+    },
+    gallery: [
+      { src: '/projects/forecasting-dashboard.jpg', label: 'Stocks', alt: 'Stock forecasting dashboard with model selection and a chart of actual and predicted prices.', caption: 'Explore historical stock data and forecasts by model.' },
+      { src: '/projects/forecasting-home.jpg', label: 'Home', alt: 'Forecasting application home page.', caption: 'The application home page introduces its forecasting tools.' },
+      { src: '/projects/forecasting-rainfall.jpg', label: 'Rainfall', alt: 'Rainfall forecasting dashboard.', caption: 'A second dashboard presents rainfall forecasts.' },
+      { src: '/projects/forecasting-comparison.jpg', label: 'Model comparison', alt: 'Forecasting model comparison screen.', caption: 'Compare forecasting model results and evaluation metrics.' },
+    ],
+    caseStudy: {
+      problem: 'Historical data, forecasts, and model evaluations need a clear place to be explored and compared.',
+      approach: 'The team built a Next.js and FastAPI application that presents forecasting results and supports uploaded CSV datasets and a conversational interface.',
+      contribution: 'I selected and trained models for stock forecasting, contributed to the frontend and API migration, improved dashboard interactions and chat streaming, and integrated uploaded datasets into the chatbot workflow.',
+      outcome: 'The application brings forecasting views, model comparisons, user-provided datasets, and chat into one interface.',
+    },
+  },
   {
     id: 'fotorame',
     title: 'FotoRame',
