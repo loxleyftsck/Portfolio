@@ -338,7 +338,7 @@ export const social = {
 };
 
 export const meta = {
-  name: 'Herald Ginting',
+  name: 'Herald Samuel Ginting',
   fullName: 'Herald Michain Samuel Theo Ginting',
   title: 'AI Engineer',
   tagline:

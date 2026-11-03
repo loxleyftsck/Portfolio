@@ -30,7 +30,7 @@ export default function Hero() {
           </motion.p>
           <motion.h1 initial={reducedMotion ? false : { opacity: 0, y: 38 }}
             animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}>
-            Herald<br /><span>Ginting<span className="accent">.</span></span>
+            Herald<br /><span>Samuel<br />Ginting<span className="accent">.</span></span>
           </motion.h1>
           <motion.div initial={reducedMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.28 }}>
