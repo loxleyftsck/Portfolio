@@ -7,6 +7,7 @@ import Projects from './sections/Projects';
 import Experience from './sections/Experience';
 import Contact from './sections/Contact';
 import ScrollProgress from './components/ui/ScrollProgress';
+import BackgroundMusic from './components/ui/BackgroundMusic';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <div className="app-shell">
         <a className="skip-link" href="#main">Skip to content</a>
         <ScrollProgress />
+        <BackgroundMusic />
         <Navbar />
         <main id="main">
           <Hero />
