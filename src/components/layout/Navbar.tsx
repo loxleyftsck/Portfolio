@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Menu, X, Sun, Moon, ArrowUpRight } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 
@@ -13,6 +14,8 @@ export default function Navbar() {
   const { theme, toggle } = useTheme();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('#hero');
+  const [scrolled, setScrolled] = useState(false);
+  const reduce = useReducedMotion();
   const header = useRef<HTMLElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
 
@@ -21,6 +24,7 @@ export default function Navbar() {
     let frame = 0;
     const update = () => {
       frame = 0;
+      setScrolled(window.scrollY > 16);
       const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id]'));
       const current = sections.filter(section => section.getBoundingClientRect().top <= 145).at(-1);
       setActive(current ? '#' + current.id : '#hero');
@@ -57,12 +61,16 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header className="site-header" ref={header}>
+    <header className="site-header" ref={header} data-scrolled={scrolled || undefined}>
       <div className="shell site-nav">
         <a href="#hero" className="wordmark" aria-label="HG.ai home" onClick={() => setOpen(false)}>HG<span>.ai</span></a>
         <nav className="desktop-nav" aria-label="Main navigation">
-          {navLinks.map(link => <a key={link.href} href={link.href}
-            aria-current={active === link.href ? 'location' : undefined}>{link.label}</a>)}
+          {navLinks.map(link => <motion.a key={link.href} href={link.href}
+            aria-current={active === link.href ? 'location' : undefined}>
+            {link.label}
+            {active === link.href && <motion.span className="nav-active-marker" layoutId="nav-active-marker"
+              transition={reduce ? { duration: 0 } : { type: 'spring', stiffness: 360, damping: 34 }} />}
+          </motion.a>)}
         </nav>
         <div className="nav-actions">
           <button type="button" onClick={toggle} className="icon-button"
