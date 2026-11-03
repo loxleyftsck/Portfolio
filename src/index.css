@@ -19,7 +19,27 @@
   --surface: #eae8e3;
   --accent: #b93d08;
   --header: rgb(243 241 236 / .88);
+  --motion-fast: .18s;
+  --motion-base: .28s;
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
 }
+
+/* Scroll choreography inspired by Aulianza, adapted to the portfolio's restrained palette. */
+.scroll-progress { position: fixed; inset: 0 auto auto 0; z-index: 120; width: 100%; height: 2px; background: var(--accent); transform-origin: 0 50%; pointer-events: none; }
+.site-header { transition: box-shadow var(--motion-base) var(--motion-ease), border-color var(--motion-base) var(--motion-ease); }
+.site-header[data-scrolled="true"] { box-shadow: 0 8px 28px rgb(0 0 0 / .055); }
+.desktop-nav a[aria-current="location"]::after { display: none; }
+.nav-active-marker { position: absolute; inset-inline: 0; bottom: -7px; height: 1px; background: var(--accent); pointer-events: none; }
+.projects-section > .shell { position: relative; z-index: 1; }
+.section-watermark { position: absolute; z-index: 0; top: 128px; left: 43%; color: transparent; -webkit-text-stroke: 1px var(--line); opacity: .42; font-size: clamp(96px, 17vw, 230px); font-weight: 600; line-height: .8; letter-spacing: -.09em; white-space: nowrap; pointer-events: none; user-select: none; }
+.detail-project-nav { display: flex; align-items: center; gap: 5px; margin-left: auto; margin-right: 16px; color: var(--subtle); font: 10px 'IBM Plex Mono', monospace; }
+.detail-project-nav span { margin-right: 8px; color: var(--accent); }
+.detail-project-nav button { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--muted); transition: color var(--motion-fast), border-color var(--motion-fast), background var(--motion-fast), transform var(--motion-fast); }
+.detail-project-nav button:hover { color: var(--accent); border-color: var(--accent); background: var(--surface); transform: translateY(-1px); }
+.button:active, .project-links button:active, .project-filter button:active, .detail-project-nav button:active { transform: scale(.975); }
+@media (max-width: 700px) { .section-watermark { top: 100px; left: 18%; font-size: clamp(76px, 19vw, 132px); opacity: .28; } }
+@media (max-width: 520px) { .detail-project-nav { gap: 2px; margin-right: 8px; } .detail-project-nav button { width: 34px; height: 34px; } .detail-project-nav span { font-size: 9px; margin-right: 4px; } }
+@media (prefers-reduced-motion: reduce) { .scroll-progress { display: none; } .section-watermark { transform: none !important; } }
 :root.dark {
   color-scheme: dark;
   --bg: #0a0a0c;

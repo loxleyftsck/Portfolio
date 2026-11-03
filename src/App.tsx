@@ -6,12 +6,14 @@ import About from './sections/About';
 import Projects from './sections/Projects';
 import Experience from './sections/Experience';
 import Contact from './sections/Contact';
+import ScrollProgress from './components/ui/ScrollProgress';
 
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="app-shell">
         <a className="skip-link" href="#main">Skip to content</a>
+        <ScrollProgress />
         <Navbar />
         <main id="main">
           <Hero />

@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, animate, motion, useInView, useMotionValue, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import { projects, filters } from '../data/portfolio';
 import type { Category, Project } from '../data/portfolio';
@@ -16,9 +16,13 @@ const orderedProjects = [
 
 export default function Projects() {
   const reducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] });
+  const watermarkY = useTransform(scrollYProgress, [0, 1], [16, -16]);
   const [active, setActive] = useState<Filter>('all');
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<Project | null>(null);
+  const [detailDirection, setDetailDirection] = useState<-1 | 1>(1);
   const detailTrigger = useRef<HTMLButtonElement | null>(null);
   const searchInput = useRef<HTMLInputElement | null>(null);
   const openDetails = (project: Project, trigger: HTMLButtonElement) => {
@@ -29,6 +33,14 @@ export default function Projects() {
     setSelected(null);
     requestAnimationFrame(() => detailTrigger.current?.focus({ preventScroll: true }));
   };
+  const navigateDetails = (direction: -1 | 1) => {
+    if (!selected) return;
+    const currentIndex = orderedProjects.findIndex(project => project.id === selected.id);
+    const nextIndex = (currentIndex + direction + orderedProjects.length) % orderedProjects.length;
+    setDetailDirection(direction);
+    setSelected(orderedProjects[nextIndex]);
+  };
+  const selectedIndex = selected ? orderedProjects.findIndex(project => project.id === selected.id) : -1;
   const search = query.trim().toLowerCase();
   const filtered = orderedProjects.filter(project =>
     (active === 'all' || project.category.includes(active)) &&
@@ -40,7 +52,8 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="section projects-section">
+    <section ref={sectionRef} id="projects" className="section projects-section">
+      <motion.span className="section-watermark" style={reducedMotion ? undefined : { y: watermarkY }} aria-hidden="true">SYSTEMS</motion.span>
       <div className="shell">
         <Flagship />
         <Reveal className="section-heading">
@@ -62,9 +75,7 @@ export default function Projects() {
             {query && <button type="button" aria-label="Clear project search" onClick={() => setQuery('')}><X size={16} /></button>}
           </div>
         </div>
-        <p className="project-count" role="status" aria-live="polite" aria-atomic="true">
-          {filtered.length} of {projects.length} projects
-        </p>
+        <ProjectCount value={filtered.length} total={projects.length} />
         {filtered.length === 0 && <motion.div className="project-empty"
           initial={reducedMotion ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : 0.3 }}>
@@ -84,8 +95,41 @@ export default function Projects() {
           </AnimatePresence>
         </motion.div>
       </div>
-      {selected && <ProjectDetails key={selected.id} project={selected} onClose={closeDetails} />}
+      {selected && <ProjectDetails project={selected} onClose={closeDetails} onNavigate={navigateDetails}
+        index={selectedIndex} total={orderedProjects.length} direction={detailDirection} />}
     </section>
+  );
+}
+
+function ProjectCount({ value, total }: { value: number; total: number }) {
+  const countRef = useRef<HTMLParagraphElement>(null);
+  const isInView = useInView(countRef, { once: true, amount: 0.65 });
+  const reduce = useReducedMotion();
+  const count = useMotionValue(0);
+  const label = useTransform(count, current => `${Math.round(current)} of ${total} projects`);
+  const entered = useRef(false);
+
+  useEffect(() => {
+    if (!isInView) return;
+    if (reduce) {
+      count.set(value);
+      entered.current = true;
+      return;
+    }
+    if (!entered.current) count.set(0);
+    const controls = animate(count, value, {
+      duration: entered.current ? 0.32 : 0.82,
+      ease: [0.22, 1, 0.36, 1],
+    });
+    entered.current = true;
+    return controls.stop;
+  }, [count, isInView, reduce, value]);
+
+  return (
+    <p ref={countRef} className="project-count" role="status" aria-live="polite" aria-atomic="true">
+      <motion.span aria-hidden="true">{label}</motion.span>
+      <span className="sr-only">{value} of {total} projects</span>
+    </p>
   );
 }
 

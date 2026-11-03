@@ -1,16 +1,23 @@
-import { useReducedMotion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, X } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import type { Project } from '../../data/portfolio';
 import { GithubIcon } from './SocialIcons';
 
-export default function ProjectDetails({ project, onClose }: { project: Project; onClose: () => void }) {
+export default function ProjectDetails({ project, onClose, onNavigate, index, total, direction }: {
+  project: Project; onClose: () => void; onNavigate: (direction: -1 | 1) => void;
+  index: number; total: number; direction: -1 | 1;
+}) {
   const dialog = useRef<HTMLDialogElement>(null);
   const reducedMotion = useReducedMotion();
   const [closing, setClosing] = useState(false);
-  const [activeImage, setActiveImage] = useState(0);
+  const [gallerySelection, setGallerySelection] = useState<{ projectId: string; index: number }>({ projectId: project.id, index: 0 });
+  const activeImage = gallerySelection.projectId === project.id ? gallerySelection.index : 0;
   const currentImage = project.gallery?.[activeImage] ?? project.image;
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useLayoutEffect(() => {
+    dialog.current?.scrollTo({ top: 0 });
+  }, [project.id]);
   const requestClose = () => {
     if (closeTimer.current !== null || closing) return;
     if (reducedMotion) { onClose(); return; }
@@ -41,19 +48,33 @@ export default function ProjectDetails({ project, onClose }: { project: Project;
       }}>
       <div className="detail-topline">
         <p className="detail-eyebrow">Project overview</p>
+        <div className="detail-project-nav" role="group" aria-label="Browse projects">
+          <span>{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+          <button type="button" aria-label="Previous project" onClick={() => onNavigate(-1)}><ChevronLeft size={17} /></button>
+          <button type="button" aria-label="Next project" onClick={() => onNavigate(1)}><ChevronRight size={17} /></button>
+        </div>
         <button type="button" className="icon-button" aria-label="Close project details" onClick={requestClose} autoFocus>
           <X size={20} />
         </button>
       </div>
+      <AnimatePresence mode="wait" initial={false} custom={direction}>
+      <motion.div key={project.id} custom={direction}
+        variants={{ enter: (step: number) => ({ opacity: 0, x: step * 18 }), center: { opacity: 1, x: 0 }, exit: (step: number) => ({ opacity: 0, x: step * -18 }) }}
+        initial={reducedMotion ? false : 'enter'} animate="center" exit={reducedMotion ? undefined : 'exit'}
+        transition={{ duration: reducedMotion ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}>
       <h2 id="project-detail-title">{project.title}</h2>
       <p className="detail-description">{project.description}</p>
-      {currentImage && <figure className="detail-evidence">
-        <img src={currentImage.src} alt={currentImage.alt} decoding="async" />
-        <figcaption>{currentImage.caption ?? currentImage.alt}</figcaption>
-      </figure>}
+      <AnimatePresence mode="wait" initial={false}>
+        {currentImage && <motion.figure key={currentImage.src} className="detail-evidence"
+          initial={reducedMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+          exit={reducedMotion ? undefined : { opacity: 0, y: -8 }} transition={{ duration: reducedMotion ? 0 : 0.2 }}>
+          <img src={currentImage.src} alt={currentImage.alt} decoding="async" />
+          <figcaption>{currentImage.caption ?? currentImage.alt}</figcaption>
+        </motion.figure>}
+      </AnimatePresence>
       {project.gallery && <div className="detail-gallery" role="group" aria-label="Project screenshots">
         {project.gallery.map((image, index) => <button type="button" key={image.src}
-          aria-pressed={activeImage === index} onClick={() => setActiveImage(index)}>
+          aria-pressed={activeImage === index} onClick={() => setGallerySelection({ projectId: project.id, index })}>
           <img src={image.src} alt="" loading="lazy" decoding="async" />
           <span>{image.label}</span>
         </button>)}
@@ -79,6 +100,8 @@ export default function ProjectDetails({ project, onClose }: { project: Project;
           <GithubIcon size={17} /> {project.githubLabel ?? 'Explore source'} <ArrowUpRight size={17} />
         </a>}
       </div>
+      </motion.div>
+      </AnimatePresence>
     </dialog>
   );
 }

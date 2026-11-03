@@ -39,10 +39,10 @@ export default function Flagship() {
       <div className="flagship-intro"><p>Three projects, three different questions. A look at the problems, decisions, and evidence behind the work.</p><a href="#all-projects">Browse all projects <ArrowUpRight size={15} /></a></div>
     </Reveal>
     <div className="flagship-list">
-      {studies.map(study => {
+      {studies.map((study, index) => {
         const project = projects.find(item => item.id === study.id);
         if (!project?.image) return null;
-        return <Reveal key={study.id} className="flagship-reveal">
+        return <Reveal key={study.id} className="flagship-reveal" delay={index * 0.075}>
           <article className="flagship-case">
             <div className="flagship-content">
               <div className="flagship-meta"><span>CASE STUDY / {study.number}</span><span>{study.label}</span></div>
