@@ -9,7 +9,10 @@ export default function About() {
         <Reveal className="about-intro">
           <div className="profile-asset">
             <div className="portrait-frame">
-            <img src="/portrait.webp" alt={meta.fullName} width="720" height="960" loading="lazy" decoding="async" />
+              <img src="/portrait-cafe.webp" alt={`${meta.fullName} standing in front of a coffee shop`} width="960" height="1200" loading="lazy" decoding="async" />
+            </div>
+            <div className="portrait-secondary">
+              <img src="/portrait.webp" alt={`${meta.fullName} in a suit`} width="720" height="960" loading="lazy" decoding="async" />
             </div>
             <div className="profile-caption"><span>HG / RESEARCH PROFILE</span><span>JAKARTA, ID</span></div>
           </div>
